@@ -1,0 +1,6 @@
+app:
+  id: cloud-copy
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: application,CloudPlatform.global_common,CloudPlatform.global_datasource,CloudPlatform.global_nacos,CloudPlatform.global_es,CloudPlatform.global_redis

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upuphone.cloudplatform.document.mapper.DocumentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.upuphone.cloudplatform.document.entity.DocumentPo">
+        <id column="id" property="id" />
+        <result column="type_id" property="typeId" />
+        <result column="name" property="name" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type_id, name, update_by, update_time, create_by, create_time, is_deleted
+    </sql>
+
+    <select id="selectByTypeAndName" resultMap="BaseResultMap">
+        SELECT *
+        FROM `cloud-copy-manage`.document
+        <where>
+            <if test="typeId != null and typeId != ''">
+                type_id LIKE CONCAT('%',#{typeId},'%')
+            </if>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%',#{name},'%')
+            </if>
+            AND is_deleted = 0
+        </where>
+    </select>
+</mapper>

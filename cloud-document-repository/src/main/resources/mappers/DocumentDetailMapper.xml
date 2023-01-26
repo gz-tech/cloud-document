@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upuphone.cloudplatform.document.mapper.DocumentDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.upuphone.cloudplatform.document.entity.DocumentDetailPo">
+        <id column="id" property="id" />
+        <result column="document_version" property="documentVersion" />
+        <result column="language" property="language" />
+        <result column="content_type" property="contentType" />
+        <result column="content" property="content" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="versionId" property="versionId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, document_version, language, content_type, content, create_by, create_time, update_by, update_time, is_deleted
+    </sql>
+
+    <select id="selectDocuments" parameterType="java.lang.String" resultMap = "BaseResultMap">
+        select detail.id,
+               detail.document_version,
+               detail.content,
+               version.version_id as versionId,
+               detail.content_type
+        from document_detail detail
+        left join document_version version on version.id = detail.document_version
+        left join document d on d.id = version.document_id
+        where d.type_id = #{documentId, jdbcType = VARCHAR}
+        and detail.language = #{language, jdbcType = VARCHAR}
+        <if test="versionId != null and versionId != ''">
+            and version.version_id = #{versionId, jdbcType = VARCHAR}
+        </if>
+    </select>
+
+</mapper>

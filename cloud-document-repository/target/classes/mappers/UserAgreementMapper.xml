@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upuphone.cloudplatform.document.mapper.UserAgreementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.upuphone.cloudplatform.document.entity.UserAgreementPo">
+        <result column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="doc_detail_id" property="docDetailId" />
+        <result column="is_agree" property="isAgree" />
+        <result column="device_type" property="deviceType" />
+        <result column="device_id" property="deviceId" />
+        <result column="extra" property="extra" jdbcType="BLOB" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_by" property="updateBy" />
+        <result column="is_deleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id, doc_detail_id, is_agree, device_type, device_id, extra, create_time, update_time, create_by, update_by, is_deleted
+    </sql>
+
+</mapper>
